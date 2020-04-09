@@ -1,38 +1,128 @@
-.App {
-  text-align: center;
+html{
+  box-sizing: border-box;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.main{
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  position: relative;
+}
+
+.bg-container{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url("../src/assets/img/background.jpg");
+  overflow: hidden;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.overlay::before{
+  position: absolute;
+  content: '';
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(31,39,73,0.6)!important;
+}
+
+#myheader{
+  transition: 0.2s all ease-in;
+}
+
+.icon-white{
   color: white;
+  font-size: 26px;
 }
 
-.App-link {
-  color: #61dafb;
+.title{
+  top: 45vh;
+  left: 8.8%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.pd-header-mobile{
+  padding-left: 0;
+  padding-right: 0;
+}
+/* Mobile */
+@media (max-width: 575px){
+  .title{
+      left: 3%;
   }
-  to {
-    transform: rotate(360deg);
+
+  .pd-header-mobile{
+      padding-left: 15px;
+      padding-right: 15px;
   }
+}
+
+/* IPad */
+@media (min-width: 576px) and (max-width: 768px){
+  .title{
+      left: 3.6%;
+  }
+}
+
+.mt-header{
+  margin-top: 70px;
+}
+
+.title-question{
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  
+}
+
+.my-border-radius{
+  border-radius: 0.25rem;
+}
+
+@keyframes fadeIn{
+  from{
+      transform: translateY(-50%);
+      opacity: 0;
+  }
+  to{
+      transform: translateY(0%);
+      opacity: 1;
+  }
+}
+
+.dropdown-menu{
+  animation: fadeIn ease 0.2s;
+}
+
+.my-padding-like-navbar{
+  margin: 0.5rem 1rem;
+}
+
+.card .card-body{
+  cursor: pointer;
+}
+
+.navbar-brand{
+  padding: 0;
+  width: 16% !important;
+}
+
+.navbar-toggler.navbar-toggler-btn--border{
+  border-color: transparent !important;
+  padding: 0 !important;
+  outline: none;
+}
+
+.navbar-nav .nav-item{
+  margin-right: 8%;
+}
+
+.mycursor{
+  cursor: pointer;
+}
+
+.my_display_none{
+  display: none !important;
 }

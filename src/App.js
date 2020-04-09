@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import {BrowserRouter as Router} from 'react-router-dom';
+import {connect} from 'react-redux';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import Footer from './components/Footer';
+import RedirectURL from './router/RedirectURL';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      mylistword:null
+    }
+  }
+  
+  render(){
+    return (
+      <Router>
+        <div>
+          <RedirectURL></RedirectURL>
+          <Footer></Footer>
+        </div>
+      </Router>
+      
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    // getAllWords: () => {
+    //   dispatch(actGetWordsRequest());
+    // }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App)

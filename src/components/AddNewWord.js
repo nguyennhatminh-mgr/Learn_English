@@ -3,12 +3,15 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 
 import Header from './Header';
+import { actGetOneWordRequest,actOnUpdateRequest } from '../actions/action';
+import { Link } from 'react-router-dom';
 
 class AddNewWord extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            id:null,
             word:"",
             meaning:"",
             type:"",
@@ -25,7 +28,7 @@ class AddNewWord extends Component {
         });
     }
 
-    handleClick = () => {
+    handleClickAdd = () => {
         if(this.state.word ===""){
             alert("Please fill word!!!");
             return;
@@ -59,8 +62,67 @@ class AddNewWord extends Component {
             alert("Add new word success");
         });
 
-        // this.props.updateListWord(); 
+        this.setState({
+            id: null,
+            word: "",
+            meaning: "",
+            type: "",
+            image_link: ""
+        });
+
     }
+
+    handleClickEdit = () => {
+        var word = {};
+        word.id = this.state.id;
+        word.word = this.state.word;
+        word.meaning = this.state.meaning;
+        word.type = this.state.type;
+        word.image_link = this.state.image_link;
+        this.props.onUpdateWord(word);
+    }
+
+    componentDidMount() {
+        if (this.props.match.params.id){
+            this.props.getOneWord(this.props.match.params.id);
+        }
+    }
+    
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        if (nextProps && nextProps.wordediting){
+            var wordediting = nextProps.wordediting;
+            this.setState({
+                id: wordediting.id,
+                word: wordediting.word,
+                meaning: wordediting.meaning,
+                type: wordediting.type,
+                image_link: wordediting.image_link
+            });
+        }
+    }
+
+    showTitle = () => {
+        if(this.props.match.params.id){
+            return "Edit word";
+        }
+        else{
+            return "Add new word";
+        }
+    }
+    
+    showButton = () => {
+        if(this.props.match.params.id){
+            return (
+                <Link to="/viewlistword" onClick={this.handleClickEdit} className="btn btn-success btn-block">Edit</Link>
+            );
+        }
+        else{
+            return (
+                <button onClick={this.handleClickAdd} type="reset" className="btn btn-success btn-block">Add</button>
+            );
+        }
+    }
+    
 
     render() {
         return (
@@ -70,7 +132,7 @@ class AddNewWord extends Component {
                     <div className="row">
                         <div className="col-12">
                         <div className="card text-white bg-primary mb-3">
-                            <div className="card-header">Add new word</div>
+                        <div className="card-header">{this.showTitle()}</div>
                         </div>
                         </div>
                     </div>
@@ -79,15 +141,15 @@ class AddNewWord extends Component {
                         <form>
                             <div className="form-group">
                                 <label htmlFor="word">Word</label>
-                                <input onChange={(event) => this.isChange(event)} type="text" className="form-control" name="word" id="word" aria-describedby="helpId" placeholder="Enter word" />
+                                <input onChange={(event) => this.isChange(event)} value={this.state.word} type="text" className="form-control" name="word" id="word" aria-describedby="helpId" placeholder="Enter word" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="meaning">Meaning</label>
-                                <input onChange={(event) => this.isChange(event)} type="text" className="form-control" name="meaning" id="meaning" aria-describedby="helpId" placeholder="Enter meaning" />
+                                <input onChange={(event) => this.isChange(event)} value={this.state.meaning} type="text" className="form-control" name="meaning" id="meaning" aria-describedby="helpId" placeholder="Enter meaning" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="type">Type word</label>
-                                <select defaultValue={this.state.defaultType} onChange={(event) => this.isChange(event)} name="type" className="form-control" id="exampleFormControlSelect1">
+                                <select value={this.state.type} onChange={(event) => this.isChange(event)} name="type" className="form-control" id="exampleFormControlSelect1">
                                     <option value="n">Noun</option>
                                     <option value="adj">Adjective</option>
                                     <option value="v">Verb</option>
@@ -98,9 +160,11 @@ class AddNewWord extends Component {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="image_link">Link image</label>
-                                <input onChange={(event) => this.isChange(event)} type="text" className="form-control" name="image_link" id="image_link" aria-describedby="helpId" placeholder="Enter link image" />
+                                <input onChange={(event) => this.isChange(event)} value = {this.state.image_link} type="text" className="form-control" name="image_link" id="image_link" aria-describedby="helpId" placeholder="Enter link image" />
                             </div>
-                            <button onClick={this.handleClick} type="reset" className="btn btn-success btn-block">Add</button>
+                            {
+                                this.showButton()
+                            }
                         </form>
                         </div>
                     </div>
@@ -112,17 +176,18 @@ class AddNewWord extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        words: state.words
+        wordediting: state.wordediting
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        // updateListWord: () => {
-        //     dispatch({
-        //         type:"GET_DATA"
-        //     })
-        // }
+        getOneWord: (id) => {
+            dispatch(actGetOneWordRequest(id))
+        },
+        onUpdateWord: (word) => {
+            dispatch(actOnUpdateRequest(word))
+        }
     }
 }
 

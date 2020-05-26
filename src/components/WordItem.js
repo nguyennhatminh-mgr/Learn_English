@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 import {actOndeleteRequest} from '../actions/action';
+import { Link } from 'react-router-dom';
 
 class WordItem extends Component {
 
@@ -21,7 +22,7 @@ class WordItem extends Component {
                 <td className="w-25"><img className="w-100" src={this.props.image_link} alt="show implied word"></img></td>
                 <td>
                     <div className="btn-group">
-                        <button className="btn btn-warning mr-1 d-flex align-items-center"><i className="far fa-edit"></i></button>
+                        <Link to={"/deleteword/" + this.props.id +".html"} className="btn btn-warning mr-1 d-flex align-items-center"><i className="far fa-edit"></i></Link>
                         <button onClick={() => this.onDelete(this.props.id)} className="btn btn-danger d-flex align-items-center"><i className="far fa-trash-alt mr-1"></i></button>
                     </div>  
                 </td>

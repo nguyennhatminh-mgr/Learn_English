@@ -20,10 +20,17 @@ const words = (state = initialState, action) => {
         case Types.GET_WORD:
             state = action.words;
             return [...state]
+
         case Types.DELETE_WORD:
             var index = findIndexById(state,0,state.length - 1, action.id);
             state.splice(index,1);
             return [...state]
+
+        case Types.UPDATE_WORD:
+            index = findIndexById(state, 0 ,state.length - 1, action.word.id);
+            state[index] = action.word
+            return [...state]
+
         default:
             return [...state]
     }

@@ -19,8 +19,8 @@ class ConnectionVocab extends Component {
                         <div className="col-12">
                             <div className="text-white bg-primary mb-3 my-border-radius">
                             <div className="d-flex title-question">
-                                <div className>Time: <span>00</span>:<span>01</span>:<span>30</span></div>
-                                <div className><span>1</span> right | <span>0</span> wrong</div>
+                                <div>Time: <span>00</span>:<span>01</span>:<span>30</span></div>
+                                <div><span>1</span> right | <span>0</span> wrong</div>
                             </div>
                             </div>
                         </div>

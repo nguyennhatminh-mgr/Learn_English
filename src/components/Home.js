@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import {NavLink} from 'react-router-dom';
-import avatar from '../assets/img/background.jpg';
+import avatar from '../assets/img/my_avatar.jpg';
 
 class Home extends Component {
     render() {

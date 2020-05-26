@@ -52,6 +52,7 @@ class Header extends Component {
                         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                             <NavLink className="dropdown-item" to="/choicevocab">Choice Vocabulary</NavLink>
                             <NavLink className="dropdown-item" to="/connectionvocab">Connection Vocabulary</NavLink>
+                            <NavLink className="dropdown-item" to="/listquestionaudio">Listen and write</NavLink>
                             <div className="dropdown-divider" />
                             <a className="dropdown-item" href="/">Something else here</a>
                         </div>
@@ -75,6 +76,7 @@ class Header extends Component {
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <NavLink className="dropdown-item" to="/addnewword">Add new word</NavLink>
                                 <NavLink className="dropdown-item" to="/viewlistword">View list words</NavLink>
+                                <NavLink className="dropdown-item" to="/addaudio">Add audio</NavLink>
                                 <div className="dropdown-divider" />
                                 <a className="dropdown-item" href="/">Something else here</a>
                             </div>
